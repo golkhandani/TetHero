@@ -35,7 +35,7 @@ async function main() {
     const mongoInstance = await MongoConnection.getInstance();
 
     // runMongoCrawlerScheduler(mongoInstance.collection(Pricing.name));
-    runTokenBazCrawler(mongoInstance.collection(Pricing.name + "-TokenBaz"))
+    runTokenBazCrawler(mongoInstance.collection(Pricing.name))
     const port = Number(process.env.PORT || 3000);
 
    
@@ -98,7 +98,7 @@ async function main() {
 
     app.use(cors())
     const pricingService = new PricingService(
-        mongoInstance.collection(Pricing.name + "-TokenBaz"),
+        mongoInstance.collection(Pricing.name),
     );
     const pricingRouter = new PricingRouter(pricingService).setupRoutes();
     app.use('/api', pricingRouter);
